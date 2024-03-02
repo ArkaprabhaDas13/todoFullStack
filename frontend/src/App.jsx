@@ -53,7 +53,8 @@ function App() {
     console.log("putFunction running !!!")
     console.log(editedValue)
     await axios.put(`http://localhost:3000/todos/${todoId}`, { message: editedValue });
-    fetchTodo();
+    // console.log(todoFlag," ",todoId);
+    // fetchTodo();
   }
 
   const handleSave = ()=>{
@@ -71,6 +72,7 @@ function App() {
     })
 
     setTodos(newTodo);
+    console.log(todoFlag," - ",todoId)
     setTodoFlag('');
     setEditedValue('');
     // setTodoId('');

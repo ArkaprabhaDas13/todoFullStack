@@ -34,7 +34,7 @@ app.delete('/todos/:id', (req,res)=>{
 app.put('/todos/:id', (req,res)=>{
     const {id} = req.params;
     const updatedTodo = req.body
-    todos = todos.map(todo=>(todo.id==id?updatedTodo:todo))
+    // todos = todos.map(todo=>(todo.id==id?updatedTodo:todo))
     res.json(updatedTodo)
 })
 

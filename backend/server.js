@@ -34,8 +34,11 @@ app.delete('/todos/:id', (req,res)=>{
 app.put('/todos/:id', (req,res)=>{
     const {id} = req.params;
     const updatedTodo = req.body
-    // todos = todos.map(todo=>(todo.id==id?updatedTodo:todo))
-    res.json(updatedTodo)
+    const index = todos.findIndex(todo=>todo.id === parseInt(req.params.id))
+    todos[index].message = req.body.message;
+    todos[index].id = req.params.id;
+    console.log('Index = ',index)
+    res.json(todos[index]);
 })
 
 app.listen(3000,()=>{

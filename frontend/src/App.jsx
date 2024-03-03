@@ -52,12 +52,13 @@ function App() {
   const putFunction = async (id)=>{
     console.log("putFunction running !!!")
     console.log(editedValue)
-    await axios.put(`http://localhost:3000/todos/${todoId}`, { message: editedValue });
-    // console.log(todoFlag," ",todoId);
-    // fetchTodo();
+    await axios.put(`http://localhost:3000/todos/${id}`, { message: editedValue });
+    console.log(todoFlag," ",todoId);
+    console.log(todoId);
+    fetchTodo();
   }
 
-  const handleSave = ()=>{
+  const handleSave = (id)=>{
 
     const newTodo = todos.map((todo)=>{
       if(todo.id == todoId)
@@ -102,7 +103,7 @@ function App() {
             <li key={index}>
 
               {todo.id!==todoFlag ? <span>{todo.message} <button className='btn btn-warning' onClick={()=>handleEdit(todo)}>Edit</button> </span>:
-              <span><input type="text" placeholder={todo.message} onChange={(e)=>setEditedValue(e.target.value)} value={editedValue}/> <button onClick={()=>handleSave()} className='btn btn-success'>Save</button></span>}
+              <span><input type="text" placeholder={todo.message} onChange={(e)=>setEditedValue(e.target.value)} value={editedValue}/> <button onClick={()=>handleSave(todo.id)} className='btn btn-success'>Save</button></span>}
               
               <button className='btn btn-danger' onClick={()=>handleDelete(todo.id)}>Delete</button> 
                         

@@ -26,11 +26,14 @@ function App() {
   const handleInput = async()=>{
 
     try{
-      const response = await axios.post('http://localhost:3000/todos',{
-        message:input 
+      console.log("Beginning of try block")
+      const response = await axios.post('http://localhost:3000/signup',{
+        task:input
       })
-
-      fetchTodo()
+      setTodos(response.data)
+      console.log(response.data);
+      // fetchTodo()
+      console.log("Reached at TRY block")
       // setTodos([...todos,response.data])
 
     }catch(error){
@@ -38,7 +41,7 @@ function App() {
     }
 
 
-    // setTodos([...todos,{'id':todos.length+1, 'message':input}])
+    // setTodos([...todos,{'id':todos.length+1, 'task':input}])
     console.log(todos);
     setInput('');
   }
@@ -52,7 +55,7 @@ function App() {
   const putFunction = async (id)=>{
     console.log("putFunction running !!!")
     console.log(editedValue)
-    await axios.put(`http://localhost:3000/todos/${id}`, { message: editedValue });
+    await axios.put(`http://localhost:3000/todos/${id}`, { task: editedValue });
     console.log(todoFlag," ",todoId);
     console.log(todoId);
     fetchTodo();
@@ -65,10 +68,10 @@ function App() {
       {
         putFunction(todo.id);
         // fetchTodo();
-        return({id:todoId, message:editedValue});
+        return({id:todoId, task:editedValue});
       }
       else{
-        return({id:todo.id, message:todo.message});
+        return({id:todo.id, task:todo.task});
       }
     })
 
@@ -102,8 +105,8 @@ function App() {
           todos.map((todo, index) => (
             <li key={index}>
 
-              {todo.id!==todoFlag ? <span>{todo.message} <button className='btn btn-warning' onClick={()=>handleEdit(todo)}>Edit</button> </span>:
-              <span><input type="text" placeholder={todo.message} onChange={(e)=>setEditedValue(e.target.value)} value={editedValue}/> <button onClick={()=>handleSave(todo.id)} className='btn btn-success'>Save</button></span>}
+              {todo.id!==todoFlag ? <span>{todo.task} <button className='btn btn-warning' onClick={()=>handleEdit(todo)}>Edit</button> </span>:
+              <span><input type="text" placeholder={todo.task} onChange={(e)=>setEditedValue(e.target.value)} value={editedValue}/> <button onClick={()=>handleSave(todo.id)} className='btn btn-success'>Save</button></span>}
               
               <button className='btn btn-danger' onClick={()=>handleDelete(todo.id)}>Delete</button> 
                         
